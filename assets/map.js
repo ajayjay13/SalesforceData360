@@ -14,7 +14,7 @@
     panel.innerHTML = '<h3>' + esc(s.name) + '</h3><p>' + esc(s.what) + '</p><ul>' +
       s.facts.map(function(f){ return '<li>' + esc(f) + '</li>'; }).join('') +
       '</ul><div class="tr"><b>Exam trap.</b> ' + esc(s.trap) + '</div>' +
-      '<a class="go" href="/' + s.sec + '/">Open ' + esc(s.secname) + '</a>';
+      '<a class="go" href="' + (window.ROOT||'./') + s.sec + '/">Open ' + esc(s.secname) + '</a>';
     if(!fromTour){ try{ history.replaceState(null,'','#'+id); }catch(e){} }
   }
   function clear(){

@@ -4,6 +4,7 @@
   var SECS = window.SECTIONS, ALL = window.QUESTIONS;
   var secById = {}; SECS.forEach(function(s){ secById[s.id] = s; });
   var LETTERS = 'ABCDEFGH';
+  var R = window.ROOT || './';
 
   function esc(s){ var d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
   function shuffle(a){ a = a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
@@ -25,8 +26,8 @@
     document.querySelector('body').style.setProperty('--c','var(--ink)');
     var html = '<div class="secpick">' + SECS.map(function(s){
       var n = ALL.filter(function(q){ return q.s===s.id; }).length;
-      return '<a href="/drill/?s='+s.id+'" style="--c:'+s.color+'">'+esc(s.name)+'<small>'+n+' questions</small></a>';
-    }).join('') + '<a href="/drill/?s=all" style="--c:var(--ink)">All sections mixed<small>'+ALL.length+' questions</small></a></div>';
+      return '<a href="'+R+'drill/?s='+s.id+'" style="--c:'+s.color+'">'+esc(s.name)+'<small>'+n+' questions</small></a>';
+    }).join('') + '<a href="'+R+'drill/?s=all" style="--c:var(--ink)">All sections mixed<small>'+ALL.length+' questions</small></a></div>';
     app.innerHTML = html;
   }
 
@@ -149,7 +150,7 @@
         h += '<div class="rev" style="border-left-color:'+secById[q.s].color+'"><b>'+esc(q.q)+'</b>' +
           '<p>Your answer: '+(x.pick===null?'<i>none</i>':esc(q.o[x.pick]))+'</p>' +
           '<p>Correct: <b>'+esc(q.o[q.a])+'</b></p><p>'+esc(q.w)+'</p>' +
-          '<a href="/'+q.s+'/">Study '+esc(secById[q.s].short)+'</a></div>';
+          '<a href="'+R+q.s+'/">Study '+esc(secById[q.s].short)+'</a></div>';
       });
     }
     h += '<div class="qnav"><button class="btn ghost" id="again">Start again</button>' + (wrong.length ? '<button class="btn" id="retry">Retry the missed ones</button>' : '') + '</div></div>';
